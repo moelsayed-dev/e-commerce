@@ -94,5 +94,7 @@ class ProductsTableSeeder extends Seeder
             ])->categories()->attach(7);
         }
 
+        // Mark some entries as featured
+        Product::whereIn('id', [1, 12, 22, 31, 41, 43, 47, 51, 53, 61, 69, 73, 80])->update(['featured' => true]);
     }
 }
