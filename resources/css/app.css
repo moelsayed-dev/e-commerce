@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header {
+    background: url('/img/triangles.svg');
+    background-size: cover;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    opacity: 1;
+    margin: 0;
+}
+
+/**
+* The CSS shown here will not be introduced in the Quickstart guide, but shows
+* how you can use CSS to style your Element's container.
+*/
+.StripeElement {
+    background-color: white;
+    padding: 16px 16px;
+    border: 1px solid #535353;
+    outline: white solid 1px;
+    border-radius: 0.25rem;
+}
+
+.StripeElement--focus {
+    outline: #535353 solid 1px;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+    outline: none;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}
+
+#card-errors {
+    color: #fa755a;
+}
