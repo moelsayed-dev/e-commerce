@@ -10,8 +10,22 @@
         <a class="hover:underline" href="{{ route('products.show', $product->slug) }}">{{ $product->name }}</a>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 px-10 md:px-24 lg:px-52 py-20">
-        <div class="flex items-center justify-center border-gray-300">
-            <img class="mx-auto" src="{{ asset('img/products/' . $product->slug . '.jpg') }}" alt="product">
+        <div>
+            <div class="items-center justify-center border py-32 border-gray-300">
+                <img id="currentImage" class="mx-auto h-40" src="{{ productImage($product->image) }}" alt="product">
+            </div>
+
+            <div class="grid grid-cols-6 mt-4 gap-6">
+                <div class="product-thumbnail flex mx-auto border border-gray-300 items-center p-4 lg:p-0.5 xl:p-2 cursor-pointer hover:border-gray-700 border-gray-700 h-24">
+                    <img src="{{ productImage($product->image) }}" alt="product">
+                </div>
+                @foreach (json_decode($product->images, true) as $image)
+                    <div class="product-thumbnail flex mx-auto border border-gray-300 items-center p-4 lg:p-0.5 xl:p-2 cursor-pointer hover:border-gray-700 h-24">
+                        <img src="{{ productImage($image) }}" alt="product">
+                    </div>
+                @endforeach
+
+            </div>
         </div>
         <div class="product-information">
             <h2 class="text-3xl font-bold mb-8">{{ $product->name }}</h2>
@@ -19,7 +33,7 @@
                 <div class="font-semibold text-gray-500">{{ $product->details }}</div>
                 <div class="text-3xl font-bold my-5">{{ $product->presentPrice() }}</div>
                 <div class="text-lg">
-                    <p>{{ $product->description }}</p>
+                    <p>{!! $product->description !!}</p>
                 </div>
             </div>
             <div class="mt-16">
@@ -35,16 +49,24 @@
             </div>
         </div>
     </div>
-    <div class="bg-gray-100 px-10 md:px-24 lg:px-52 py-10">
-        <h3 class="text-xl font-bold">You might also like...</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center mt-10 ">
-            @foreach ($relatedProducts as $product)
-                <div class="product mb-8 font-normal text-lg border border-gray-300 shadow bg-white py-6 px-8">
-                    <a href="{{ route('products.show', $product->slug) }}"><img class="mx-auto" src="{{ asset('img/products/' . $product->slug . '.jpg') }}" alt="product"></a>
-                    <a href="{{ route('products.show', $product->slug) }}"><div class="mt-2">{{ $product->name }}</div></a>
-                    <div class="text-gray-500 font-normal">{{ $product->presentPrice() }}</div>
-                </div>
-            @endforeach
-        </div>
-    </div>
+    <x-related-products :relatedProducts="$relatedProducts" />
+@endsection
+
+@section('extra-js')
+    <script>
+        (function() {
+            const currentImage = document.querySelector('#currentImage');
+            const images = document.querySelectorAll('.product-thumbnail');
+
+            images.forEach((element) => element.addEventListener('click', changeCurrentImage));
+
+            function changeCurrentImage(e) {
+                currentImage.src = this.querySelector('img').src;
+
+                images.forEach((element) => element.classList.remove('border-gray-700'));
+                this.classList.add('border-gray-700');
+            }
+
+        })();
+    </script>
 @endsection

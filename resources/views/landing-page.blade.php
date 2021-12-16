@@ -17,10 +17,10 @@
             <div class="hero grid grid-cols-1 md:grid-cols-2 gap-4 pt-5 pb-20">
                 <div class="hero-copy text-center md:text-left">
                     <h1 class="text-4xl mt-12 font-semibold">E-Commerce Website</h1>
-                    <p class="text-lg mt-10 mb-14">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <p class="text-lg mt-10 mb-14">Includes multiple products, categories, a shopping cart, and a checkout system with Stripe integration</p>
                     <div class="flex justify-center md:justify-start">
-                        <a href="{{ route('products.index') }}" class="w-52 border-2 text-center text-lg border-gray-300 py-3 px-10 hover:bg-gray-300 hover:text-gray-900 transition ease-in-out duration-200 mr-4">Start Shopping</a>
-                        <a href="#" class="w-52 border-2 text-center text-lg border-gray-300 py-3 px-10 hover:bg-gray-300 hover:text-gray-900 transition ease-in-out duration-200">Flash Sales</a>
+                        <a href="https://github.com/moelsayed-dev/e-commerce" class="w-52 border-2 text-center text-lg border-gray-300 py-3 px-10 hover:bg-gray-300 hover:text-gray-900 transition ease-in-out duration-200 mr-4">Github</a>
+                        <a href="https://www.linkedin.com/in/mohamed-elsayed-152540129/" class="w-52 border-2 text-center text-lg border-gray-300 py-3 px-10 hover:bg-gray-300 hover:text-gray-900 transition ease-in-out duration-200">Linkedin</a>
                     </div>
                 </div> {{-- end hero-copy --}}
                 <div class="md:pl-14 mt-5 md:mt-0">
@@ -36,7 +36,7 @@
                 eos iure? Esse, nulla ut. Aliquid, temporibus quaerat. Dolor, consequatur!</p>
 
                 <div class="button-container py-16">
-                    <a href="#" class="border text-center text-lg border-gray-bg py-3 px-10 hover:bg-gray-bg hover:text-white transition ease-in-out duration-200 mr-3">Featured</a>
+                    <a href="{{ route('products.index') }}" class="border text-center text-lg border-gray-bg py-3 px-10 hover:bg-gray-bg hover:text-white transition ease-in-out duration-200 mr-3">Featured</a>
                     <a href="#" class="border text-center text-lg border-gray-bg py-3 px-10 hover:bg-gray-bg hover:text-white transition ease-in-out duration-200">On Sale</a>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             <div class="products grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center w-4/5 mx-auto">
                 @foreach ($products as $product)
                     <div class="product mb-4">
-                        <a href="{{ route('products.show', $product->slug) }}"><img class="mx-auto mb-4" src="{{ asset('img/products/' . $product->slug . '.jpg') }}" alt="product"></a>
+                        <a href="{{ route('products.show', $product->slug) }}"><img class="mx-auto mb-4" src="{{ productImage($product->image) }}" alt="product"></a>
                         <a href="{{ route('products.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
                         <div class="product-price">{{ $product->presentPrice() }}</div>
                     </div>

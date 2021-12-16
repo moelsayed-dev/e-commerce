@@ -37,7 +37,7 @@
                 <div class="products grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
                     @forelse ($products as $product)
                         <div class="product w-full mb-8 font-normal text-lg">
-                            <a href="{{ route('products.show', $product->slug) }}"><img class="mx-auto" src="{{ asset('img/products/' . $product->slug . '.jpg') }}" alt="product"></a>
+                            <a href="{{ route('products.show', $product->slug) }}"><img class="mx-auto" src="{{ productImage($product->image) }}" alt="product"></a>
                             <a href="{{ route('products.show', $product->slug) }}"><div class="mt-2">{{ $product->name }}</div></a>
                             <div class="text-gray-500 font-normal">{{ $product->presentPrice() }}</div>
                         </div>

@@ -83,7 +83,7 @@
                 @foreach (Cart::content() as $cartItem)
                     <div>
                         <div class="flex flex-col sm:flex-row justify-between items-center border-t-2 border-b-2 border-gray-300 py-4 px-2">
-                            <a href="{{ route('products.show', $cartItem->model->slug) }}" class="mb-4 sm:mb-0"><img src="{{ asset('img/products/' . $cartItem->model->slug . '.jpg') }}" alt="" class="h-20 w-28"></a>
+                            <a href="{{ route('products.show', $cartItem->model->slug) }}" class="mb-4 sm:mb-0"><img src="{{ asset('storage/' . $cartItem->model->image) }}" alt="" class="h-20 w-28"></a>
                             <div class="text-center sm:text-left">
                                 <a href="{{ route('products.show', $cartItem->model->slug) }}" class="text-lg font-sans font-semibold">{{ $cartItem->name }}</a>
                                 <p class="product-details text-gray-500 font-normal w-72">{{ $cartItem->model->details }}</p>

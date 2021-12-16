@@ -34,7 +34,7 @@
                 @foreach (Cart::content() as $cartItem)
                     <div x-data="{ open: true }">
                         <div x-show="open" class="flex flex-col sm:flex-row justify-between items-center border-t-2 border-b-2 border-gray-300 py-4 px-2">
-                            <a href="{{ route('products.show', $cartItem->model->slug) }}" class="mb-4 sm:mb-0"><img src="{{ asset('img/products/' . $cartItem->model->slug . '.jpg') }}" alt="" class="h-20 w-28"></a>
+                            <a href="{{ route('products.show', $cartItem->model->slug) }}" class="mb-4 sm:mb-0"><img src="{{ productImage($cartItem->model->image) }}" alt="" class="h-20 w-28"></a>
                             <div class="text-center sm:text-left">
                                 <a href="{{ route('products.show', $cartItem->model->slug) }}" class="text-lg font-sans">{{ $cartItem->name }}</a>
                                 <p class="product-details text-gray-500 font-normal w-72">{{ $cartItem->model->details }}</p>
@@ -88,7 +88,7 @@
                 @foreach (Cart::instance('saved')->content() as $cartItem)
                     <div x-data="{ open: true }">
                         <div x-show="open" class="flex flex-col sm:flex-row justify-between items-center border-t-2 border-b-2 border-gray-300 py-4 px-2">
-                            <a href="{{ route('products.show', $cartItem->model->slug) }}" class="mb-4 sm:mb-0"><img src="{{ asset('img/products/' . $cartItem->model->slug . '.jpg') }}" alt="" class="h-20 w-30"></a>
+                            <a href="{{ route('products.show', $cartItem->model->slug) }}" class="mb-4 sm:mb-0"><img src="{{ productImage($cartItem->model->image) }}" alt="" class="h-20 w-30"></a>
                             <div class="text-center sm:text-left">
                                 <a href="{{ route('products.show', $cartItem->model->slug) }}" class="text-lg font-sans">{{ $cartItem->name }}</a>
                                 <p class="product-details text-gray-500 font-normal">{{ $cartItem->model->details }}</p>
@@ -120,18 +120,7 @@
         @endif
     </div>
 
-    <div class="bg-gray-100 px-10 md:px-24 lg:px-52 py-10">
-        <h3 class="text-xl font-bold">You might also like...</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center mt-20 ">
-            @foreach ($relatedProducts as $product)
-                <div class="product mb-8 font-normal text-lg border border-gray-300 shadow bg-white py-6 px-8">
-                    <a href="{{ route('products.show', $product->slug) }}"><img class="mx-auto" src="{{ asset('img/products/' . $product->slug . '.jpg') }}" alt="product"></a>
-                    <a href="{{ route('products.show', $product->slug) }}"><div class="mt-2 text-lg font-semibold font-sans">{{ $product->name }}</div></a>
-                    <div class="text-gray-500 font-normal">{{ $product->presentPrice() }}</div>
-                </div>
-            @endforeach
-        </div>
-    </div>
+    <x-related-products :relatedProducts="$relatedProducts" />
 
 @endsection
 

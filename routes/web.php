@@ -8,6 +8,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaveForLaterController;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use TCG\Voyager\Facades\Voyager;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,8 @@ Route::delete('/coupon', [CouponController::class, 'destroy'])->name('coupon.des
 // Save for later Cart
 Route::delete('/saveForLater/{product}', [SaveForLaterController::class, 'destroy'])->name('saveForLater.destroy');
 Route::post('/saveForLater/moveToCart/{product}', [SaveForLaterController::class, 'moveToCart'])->name('saveForLater.moveToCart');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
